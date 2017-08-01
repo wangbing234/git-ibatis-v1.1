@@ -5,11 +5,15 @@
  */
 
 package com.qk.core.module.user.entity;
+import java.util.Date;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.qk.core.ibatis.annotation.po.TableName;
-import com.qk.core.ibatis.annotation.po.FieldName;
 import com.qk.core.ibatis.beans.Po;
 import com.qk.core.ibatis.util.date.DateUtil;
-import java.util.Date;
 /**
  *   数据实体类
  * @author rapid-code
@@ -25,11 +29,15 @@ public class User  extends Po{
 	    /**  
 	     *   
 	     */ 
-	    private String username;  
+	    @NotNull(message = "用户名不能为空")
+	    @Pattern(regexp = "[a-zA-Z0-9_]{5,10}", message = "{user.username.illegal}")
+	    private String username;
 	    /**  
 	     *   
 	     */ 
-	    private String password;  
+	    @NotNull(message = "密码不能为空")
+	    @Size(min = 5, max = 10, message = "{password.length.illegal}")
+	    private String password; 
 	    /**  
 	     *   
 	     */ 

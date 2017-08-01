@@ -6,21 +6,27 @@
 
 package com.qk.core.module.user.web;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.qk.core.beanutils.CipherUtil;
 import com.qk.core.domain.Busi;
@@ -75,7 +81,10 @@ public class UserController  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	private ResultBean update(@RequestBody User user) {
+	private ResultBean update(@RequestBody @Valid User user,BindingResult bindResult) {
+		if(bindResult.hasErrors()){
+			return fail(bindResult.getFieldError().getDefaultMessage());
+		}
 		int flag = userService.update(user);
 		logger.info("插入(User)对象成功！");
 		return success(flag);
@@ -186,5 +195,28 @@ public class UserController  extends BaseController{
 		logger.debug("用户退出登录!");
 		return success("退出成功！");
 	}
+	
+	/**
+	 * 上传测试
+	 * @param files
+	 * @param username
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)  
+    public ResultBean upload(@RequestParam("file") CommonsMultipartFile[] files,@RequestParam("username")String username) throws IllegalStateException, IOException {  
+		long  startTime=System.currentTimeMillis();
+		for (CommonsMultipartFile file : files) {
+			 System.out.println("fileName："+file.getOriginalFilename());
+		        String path="D:/"+file.getOriginalFilename();
+		        File newFile=new File(path);
+		        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+		        file.transferTo(newFile);
+		}
+		 long  endTime=System.currentTimeMillis();
+		 System.out.println("运行时间："+String.valueOf(endTime-startTime)+"ms");
+        return success("upload成功！");  
+    }  
 	
 }
