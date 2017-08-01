@@ -7,7 +7,9 @@
 2，利用泛型的特点，对service和dao进行了泛型注入，在简单的增删改查条件查询更新，等操作，不用在
    service和dao中写代码。控制层入口类示例，com.qk.core.module.user.web.UserController。
    
-3，加入代码代码生成器，更好的规范代码，和提高开发效率，地址 https://github.com/wangbing234/code_factory
+3,事务配置，默认命名开头会自动添加事务，特殊命名使用注解增加事务。
+   
+4，加入代码代码生成器，更好的规范代码，和提高开发效率，地址 https://github.com/wangbing234/code_factory
    同时也加入了文档生成器。
    
 	1)代码生成器主类路径：com.codefactory.CodeGenerator.java
@@ -15,10 +17,11 @@
 	2)代码生成器主类路径：com.doc.DB_Main.java
 	
 	3)代码生成器主类路径：com.doc.IF_Main.java
+5，2017年8月1日16:59:20，增加hibernate-validator 实体注解。
 
-自动生成的文档：
+自动生成的输出文档示例：
 接口文档(moke2017-08-01).docx
 数据库设计(moke2017-08-01).docx
 
-计划：在实体校验这块打算也使用Spring4.x注解实现，统一校验。
-	希望提出宝贵意见，持续优化代码框架。
+备注：希望提出宝贵意见，持续优化代码框架。
+
