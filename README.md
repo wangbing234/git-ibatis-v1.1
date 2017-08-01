@@ -5,7 +5,7 @@
    也可以用实体的注解实现其它变换。
    
 2，利用泛型的特点，对service和dao进行了泛型注入，在简单的增删改查条件查询更新，等操作，不用在
-   service和dao中写代码。控制层入口类，com.qk.core.module.user.web.UserController。
+   service和dao中写代码。控制层入口类示例，com.qk.core.module.user.web.UserController。
    
 3，加入代码代码生成器，更好的规范代码，和提高开发效率，地址 https://github.com/wangbing234/code_factory
    同时也加入了文档生成器。
