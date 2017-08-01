@@ -9,8 +9,11 @@
    
 3，加入代码代码生成器，更好的规范代码，和提高开发效率，地址 https://github.com/wangbing234/code_factory
    同时也加入了文档生成器。
+   
 	1)代码生成器主类路径：com.codefactory.CodeGenerator.java
+	
 	2)代码生成器主类路径：com.doc.DB_Main.java
+	
 	3)代码生成器主类路径：com.doc.IF_Main.java
 
 自动生成的文档：
